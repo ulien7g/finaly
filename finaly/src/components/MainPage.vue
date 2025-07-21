@@ -17,7 +17,8 @@
       <section id="about" class="mission">
         <h2>Наша мета</h2>
         <p>
-          Ми допомагаємо людям знайти внутрішній спокій, навчитися медитувати та покращити своє ментальне здоров'я.
+          Ми допомагаємо людям знайти внутрішній спокій, навчитися медитувати та
+          покращити своє ментальне здоров'я.
         </p>
       </section>
 
@@ -47,22 +48,38 @@
         <p>Email: support@meditation-life.com</p>
         <p>Телефон: +380 (66) 123-45-67</p>
       </section>
-   <section id="login" class="login">
+      <section id="login" class="login">
         <h2>Вхід</h2>
         <p>Увійдіть, щоб отримати доступ до куплених курсів.</p>
         <button class="open-btn" @click="openModal('login')">Увійти</button>
 
         <div v-if="showModal" class="modal-overlay" @click.self="closeModal">
           <div class="modal">
-            <h2>{{ isLogin ? 'Вхід' : 'Реєстрація' }}</h2>
+            <h2>{{ isLogin ? "Вхід" : "Реєстрація" }}</h2>
             <form @submit.prevent="submitForm">
-              <input type="text" v-model="username" placeholder="Ім'я користувача" required />
-              <input type="password" v-model="password" placeholder="Пароль" required />
-              <button type="submit">{{ isLogin ? 'Увійти' : 'Зареєструватись' }}</button>
+              <input
+                type="text"
+                v-model="username"
+                placeholder="Ім'я користувача"
+                required
+              />
+              <input
+                type="password"
+                v-model="password"
+                placeholder="Пароль"
+                required
+              />
+              <button type="submit">
+                {{ isLogin ? "Увійти" : "Зареєструватись" }}
+              </button>
             </form>
 
             <p class="switch" @click="toggleMode">
-              {{ isLogin ? 'Ще немає акаунту? Зареєструватись' : 'Вже маєте акаунт? Увійти' }}
+              {{
+                isLogin
+                  ? "Ще немає акаунту? Зареєструватись"
+                  : "Вже маєте акаунт? Увійти"
+              }}
             </p>
           </div>
         </div>
@@ -72,48 +89,65 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed } from "vue";
 
 const courses = [
-  { id: 1, title: 'Медитація для початківців', description: 'Основи спокою та усвідомлення.', price: 499 },
-  { id: 2, title: 'Антистрес-медитації', description: 'Допомога у подоланні тривожності.', price: 599 },
-  { id: 3, title: 'Практики для сну', description: 'Глибокий релакс перед сном.', price: 699 },
-]
+  {
+    id: 1,
+    title: "Медитація для початківців",
+    description: "Основи спокою та усвідомлення.",
+    price: 499,
+  },
+  {
+    id: 2,
+    title: "Антистрес-медитації",
+    description: "Допомога у подоланні тривожності.",
+    price: 599,
+  },
+  {
+    id: 3,
+    title: "Практики для сну",
+    description: "Глибокий релакс перед сном.",
+    price: 699,
+  },
+];
 
-const cart = ref([])
+const cart = ref([]);
 
 function addToCart(course) {
-  cart.value.push(course)
+  cart.value.push(course);
 }
 
 function clearCart() {
-  cart.value = []
+  cart.value = [];
 }
-const showModal = ref(false)
-const isLogin = ref(true)
-const username = ref('')
-const password = ref('')
+const showModal = ref(false);
+const isLogin = ref(true);
+const username = ref("");
+const password = ref("");
 
 function openModal(mode) {
-  isLogin.value = mode === 'login'
-  showModal.value = true
+  isLogin.value = mode === "login";
+  showModal.value = true;
 }
 
 function closeModal() {
-  showModal.value = false
-  username.value = ''
-  password.value = ''
+  showModal.value = false;
+  username.value = "";
+  password.value = "";
 }
 
 function toggleMode() {
-  isLogin.value = !isLogin.value
+  isLogin.value = !isLogin.value;
 }
 
 function submitForm() {
-  closeModal()
+  closeModal();
 }
 
-const total = computed(() => cart.value.reduce((sum, item) => sum + item.price, 0))
+const total = computed(() =>
+  cart.value.reduce((sum, item) => sum + item.price, 0)
+);
 </script>
 
 <style scoped>
@@ -239,7 +273,7 @@ button:disabled {
   padding: 30px;
   border-radius: 10px;
   width: 300px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
   text-align: center;
 }
 
@@ -258,7 +292,7 @@ button:disabled {
 .modal button {
   width: 100%;
   padding: 10px;
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
   border: none;
   border-radius: 6px;
@@ -267,7 +301,7 @@ button:disabled {
 
 .switch {
   margin-top: 15px;
-  color: #4CAF50;
+  color: #4caf50;
   cursor: pointer;
 }
 .cart {
